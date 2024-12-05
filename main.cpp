@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include <LSM6DS3.h> // IMU sensor library
 
-#define RECORD_BUTTON_PIN 7    // Pin for record button
-#define ENTER_BUTTON_PIN 8     // Pin for enter button
+#define RECORD_BUTTON_PIN     // Pin for record button TODO
+#define ENTER_BUTTON_PIN      // Pin for enter button TODO
 #define LED_INDICATOR_PIN 13   // Success indicator LED
 
 // Global variables
@@ -20,19 +20,19 @@ struct ImuData {
 };
 
 // Function prototypes
-void setupIMU();
-void setupButtons();
-void recordSequence();
-void checkSequence();
-float compareSequences(float recorded[], float stored[], int length);
+void setupIMU(); // TODO
+void setupButtons(); // TODO
+void recordSequence(); 
+void checkSequence(); // TODO
+float compareSequences(float recorded[], float stored[], int length); // TODO
 ImuData getImuData();
 
 void setup() {
     Serial.begin(9600);
     Wire.begin();
     
-    setupIMU();
-    setupButtons();
+    setupIMU(); // TODO
+    setupButtons(); // TODO
     
     pinMode(LED_INDICATOR_PIN, OUTPUT);
     digitalWrite(LED_INDICATOR_PIN, LOW);
@@ -57,14 +57,15 @@ void loop() {
         }
     }
 }
-
-void setupIMU() {
-    if (!imu.begin()) {
-        Serial.println("IMU initialization failed!");
-        while (1);
-    }
+void setupTimer() {
+    // CTC mode, prescaler 64
+    TCCR1A = 0;
+    TCCR1B = (1 << WGM12) | (1 << CS11) | (1 << CS10);
+    
+    OCR1A = 249;
+    
+    sei(); 
 }
-
 void recordSequence() {
     isRecording = true;
     int sampleCount = 0;
