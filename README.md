@@ -35,7 +35,7 @@ Record Gesture:
 
 Press left button
 Make your gesture movement
-Orange light shows it's recording
+Purplelight shows it's recording
 Green flash = saved
 
 
